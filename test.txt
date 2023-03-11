@@ -1,0 +1,5 @@
+crear titulo txt=Registro-fin
+
+crear input con ph=Nombre-de-Usuario tp=text lbl=Nombre-de-Usuario id=nom-usu fin
+crear input con ph=Password-de-Usuario tp=password lbl=Password-de-Usuario id=pass-usu fin
+crear btn tp=submit fin
