@@ -1,6 +1,9 @@
 crear titulo txt=Registro fin
 
-crear input con ph=Nombre_de_Usuario tp=text lbl=Nombre_de_Usuario id=nom-usu fin
-crear input con ph=Password_de_Usuario tp=password lbl=Password_de_Usuario id=pass-usu fin
-crear select con lbl=Estado id=estado opt=Estado_de_Mexico,edomex,true opt=Cuidad_de_Mexico,cdmx,false opt=Puebla,puebla,false
-crear btn tp=submit fin
+crear input con ph=Nombre_de_Usuario tp=text lbl=Nombre_de_Usuario id=nom-usu cl=clase1,clase2 fin
+crear input con ph=Password_de_Usuario tp=password lbl=Password_de_Usuario id=pass-usu cl=clase1 fin
+crear select con lbl=Estado id=estado cl=clase2,clase3
+    opt=Estado_de_Mexico,edomex,true
+    opt=Cuidad_de_Mexico,cdmx,false
+    opt=Puebla,puebla,false fin
+crear btn tp=submit cl=clase1,clase4 fin

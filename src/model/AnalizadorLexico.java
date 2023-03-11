@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class AnalizadorLexico {
   private final String archivoEntrada;
   private final String archivoSalida;
-  private String[] tokens;
+  private String tokensString;
   private final HashMap<String, String> propNombres = new HashMap<>();
 
   public AnalizadorLexico(String archivoEntrada, String archivoSalida){
@@ -20,7 +20,7 @@ public class AnalizadorLexico {
     propNombres.put("ph", "placeholder=");
     propNombres.put("tp", "type=");
     propNombres.put("id", "id=");
-    propNombres.put("class", "class=");
+    propNombres.put("cl", "class=");
   }
 
   private String leerArchivo(){
@@ -37,11 +37,9 @@ public class AnalizadorLexico {
   }
 
   public void crearArchivo(){
-    String tokensString = Arrays.stream(this.tokens).reduce((token1, token2) -> token1 + token2).orElse("");
-
     try{
       FileOutputStream resultado = new FileOutputStream(this.archivoSalida);
-      resultado.write(tokensString.getBytes());
+      resultado.write(this.tokensString.replaceAll("/", "").getBytes());
       resultado.close();
     } catch (IOException error){
       System.out.println(error.getMessage());
@@ -52,8 +50,8 @@ public class AnalizadorLexico {
   private String crearOpcion(String prop){
     String[] opcionValores = prop.split("=")[1].split(",");
 
-    return "<OPCION>" + "<CLAVE," + opcionValores[0].replaceAll("_", " ") + ">" + "<VALOR," + opcionValores[1] +
-            ">" + "<ESTADO," + opcionValores[2] + ">";
+    return "<OPCION>/" + "<CLAVE," + opcionValores[0].replaceAll("_", " ") + ">/" + "<VALOR," + opcionValores[1] +
+            ">/" + "<ESTADO," + opcionValores[2] + ">";
   }
 
   private String crearPropAuxiliar(String prop){
@@ -63,7 +61,7 @@ public class AnalizadorLexico {
   private String crearProp(String prop){
     String[] propValores = prop.split("=");
 
-    return this.propNombres.get(propValores[0]) + "\"" + propValores[1].replaceAll("_", " ") + "\"";
+    return this.propNombres.get(propValores[0]) + "\"" + propValores[1].replaceAll("[_,]+", " ") + "\"";
   }
 
   public String[] analizar(){
@@ -71,14 +69,14 @@ public class AnalizadorLexico {
 
     if(codigo.isEmpty() || codigo.isBlank()) return new String[]{};
 
-    this.tokens = Arrays.stream(codigo.split(" ")).map((palabra) -> {
+    this.tokensString = Arrays.stream(codigo.split(" ")).map((palabra) -> {
       if (palabra.matches("(?i)(crear|input|titulo|con|fin|btn|radio|select)")) return "<" + palabra.toUpperCase() + ">";
-      else if (palabra.matches("(txt|lbl)=[a-zA-Z-_]+")) return crearPropAuxiliar(palabra);
-      else if (palabra.matches("[a-z]+=[a-zA-Z-_]+")) return "<PROP," + crearProp(palabra) + ">";
+      else if (palabra.matches("(txt|lbl)=[a-zA-Z0-_]+")) return crearPropAuxiliar(palabra);
       else if (palabra.matches("opt=[a-zA-Z-_,]+")) return crearOpcion(palabra);
+      else if (palabra.matches("[a-z]+=[a-zA-Z0-9-_,]+")) return "<PROP," + crearProp(palabra) + ">";
       return "";
-    }).toArray(String[]::new);
+    }).reduce((token1, token2) -> token1 + "/" + token2).orElse("");
 
-    return this.tokens;
+    return this.tokensString.split("/");
   }
 }

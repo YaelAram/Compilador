@@ -1,7 +1,5 @@
 import model.AnalizadorLexico;
 
-import java.util.Arrays;
-
 public class Main {
   public static void main(String[] args) {
     String archivoEntrada = "test.txt";
@@ -11,6 +9,10 @@ public class Main {
     String[] tokens = analizadorLexico.analizar();
     analizadorLexico.crearArchivo();
 
-    System.out.println(Arrays.toString(tokens));
+    for(String token : tokens){
+      if (token.equals("<FIN>")) System.out.println(token);
+      else if (token.equals("<OPCION>")) System.out.print(System.lineSeparator() + "\t" + token);
+      else System.out.print(token);
+    }
   }
 }
