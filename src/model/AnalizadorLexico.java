@@ -5,22 +5,29 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class AnalizadorLexico {
-  private final String inputFile;
-  private final String outputFile;
-  private String tokens = "";
+  private final String archivoEntrada;
+  private final String archivoSalida;
+  private String[] tokens;
+  private final HashMap<String, String> propNombres = new HashMap<>();
 
-  public AnalizadorLexico(String inputFile, String outputFile){
-    this.inputFile = inputFile;
-    this.outputFile = outputFile;
+  public AnalizadorLexico(String archivoEntrada, String archivoSalida){
+    this.archivoEntrada = archivoEntrada;
+    this.archivoSalida = archivoSalida;
+
+    propNombres.put("ph", "placeholder=");
+    propNombres.put("tp", "type=");
+    propNombres.put("id", "id=");
+    propNombres.put("class", "class=");
   }
 
   private String leerArchivo(){
     String data = "";
 
     try{
-      data = new String(Files.readAllBytes(Paths.get(this.inputFile))).replaceAll("[ \t" + System.lineSeparator() + "]+", " ");
+      data = new String(Files.readAllBytes(Paths.get(this.archivoEntrada))).replaceAll("[ \t" + System.lineSeparator() + "]+", " ");
     } catch (IOException error) {
       System.out.println(error.getMessage());
       error.printStackTrace();
@@ -29,10 +36,12 @@ public class AnalizadorLexico {
     return data;
   }
 
-  private void crearArchivo(){
+  public void crearArchivo(){
+    String tokensString = Arrays.stream(this.tokens).reduce((token1, token2) -> token1 + token2).orElse("");
+
     try{
-      FileOutputStream resultado = new FileOutputStream(this.outputFile);
-      resultado.write(this.tokens.getBytes());
+      FileOutputStream resultado = new FileOutputStream(this.archivoSalida);
+      resultado.write(tokensString.getBytes());
       resultado.close();
     } catch (IOException error){
       System.out.println(error.getMessage());
@@ -40,20 +49,35 @@ public class AnalizadorLexico {
     }
   }
 
-  public String analizar(){
+  private String crearOpcion(String prop){
+    String[] opcionValores = prop.split("=")[1].split(",");
+
+    return "<OPCION>" + "<CLAVE," + opcionValores[0].replaceAll("_", " ") + ">" + "<VALOR," + opcionValores[1] +
+            ">" + "<ESTADO," + opcionValores[2] + ">";
+  }
+
+  private String crearPropAuxiliar(String prop){
+    return "<TEXTO," + prop.split("=")[1].replaceAll("_", " ") + ">";
+  }
+
+  private String crearProp(String prop){
+    String[] propValores = prop.split("=");
+
+    return this.propNombres.get(propValores[0]) + "\"" + propValores[1].replaceAll("_", " ") + "\"";
+  }
+
+  public String[] analizar(){
     String codigo = leerArchivo();
 
-    if(codigo.isEmpty() || codigo.isBlank()) return "";
+    if(codigo.isEmpty() || codigo.isBlank()) return new String[]{};
 
-    Arrays.stream(codigo.split(" ")).map((palabra) -> {
-      if (palabra.matches("(?i)(crear|input|titulo|con|fin|btn)")) return "<" + palabra.toUpperCase() + ">";
-      else if (palabra.matches("[a-z]{2,}=[a-z-]+")) return "<PROP," + palabra + ">";
+    this.tokens = Arrays.stream(codigo.split(" ")).map((palabra) -> {
+      if (palabra.matches("(?i)(crear|input|titulo|con|fin|btn|radio|select)")) return "<" + palabra.toUpperCase() + ">";
+      else if (palabra.matches("(txt|lbl)=[a-zA-Z-_]+")) return crearPropAuxiliar(palabra);
+      else if (palabra.matches("[a-z]+=[a-zA-Z-_]+")) return "<PROP," + crearProp(palabra) + ">";
+      else if (palabra.matches("opt=[a-zA-Z-_,]+")) return crearOpcion(palabra);
       return "";
-    })
-            .reduce((palabra1, palabra2) -> palabra1 + palabra2)
-            .ifPresent((tokens) -> this.tokens = tokens);
-
-    this.crearArchivo();
+    }).toArray(String[]::new);
 
     return this.tokens;
   }
