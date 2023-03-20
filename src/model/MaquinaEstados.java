@@ -16,10 +16,6 @@ public class MaquinaEstados {
     crearProducciones();
   }
 
-  public String getElemento() {
-    return elemento;
-  }
-
   public HashMap<String, String> getLabel() {
     return label;
   }
@@ -62,7 +58,7 @@ public class MaquinaEstados {
     else if(produccion.equals("SELECT-ESTADO")) this.opcion += (valor.equalsIgnoreCase("true")) ? " selected>" : ">";
     else if(produccion.equals("SELECT-CLAVE")){
       this.opcion += valor + "</option>";
-      this.etiqueta.put("options", this.etiqueta.getOrDefault("options", "") + this.opcion);
+      this.etiqueta.put("opciones", this.etiqueta.getOrDefault("opciones", "") + this.opcion);
       this.opcion = "<option value=\"";
     }
   }
@@ -105,6 +101,6 @@ public class MaquinaEstados {
     this.producciones.put("VALOR-ESTADO", "ESTADO");
     this.producciones.put("ESTADO-CLAVE", "CLAVE");
     this.producciones.put("CLAVE-OPCION", "OPCION");
-    this.producciones.put("ESTADO-FIN", "FIN");
+    this.producciones.put("CLAVE-FIN", "FIN");
   }
 }

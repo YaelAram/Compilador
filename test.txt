@@ -1,9 +1,12 @@
 titulo txt=Registro fin
 
-input lbl=Nombre_de_Usuario tp=text id=nom-usu ph=Nombre_de_Usuario cl=clase1,clase2 fin
-input lbl=Password_de_Usuario tp=password id=pass-usu ph=Password_de_Usuario cl=clase1 fin
-select lbl=Estado id=estado cl=clase2,clase3
+input lbl=Nombre_de_Usuario tp=text id=nom-usu ph=Nombre_de_Usuario cl=redondeado,borde fin
+input lbl=Password_de_Usuario tp=password id=pass-usu ph=Password_de_Usuario cl=borde-inferior fin
+select lbl=Genero id=genero cl=estilo
+    opt=masculino,false,Masculino
+    opt=femenino,false,Femenino fin
+select lbl=Estado id=estado cl=estilo
     opt=edomex,true,Estado_de_Mexico
     opt=cdmx,false,Cuidad_de_Mexico
     opt=puebla,false,Puebla fin
-btn txt=Registrar cl=clase1,clase4 fin
+btn txt=Registrar cl=relleno fin

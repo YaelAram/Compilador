@@ -1,25 +1,13 @@
-import model.AnalizadorLexico;
-import model.AnalizadorSintactico;
-import model.Salida;
-
-import java.util.HashMap;
-import java.util.LinkedList;
+import model.Compilador;
 
 public class Main {
   public static void main(String[] args) {
     String archivoEntrada = "test.txt";
     String archivoSalidaLexico = "analizadorLexico.out.txt";
     String archivoSalidaSintactico = "analizadorSintactico.out.txt";
-    AnalizadorLexico analizadorLexico = new AnalizadorLexico(archivoEntrada);
+    String archivoSalidaHTML = "index.html";
 
-    String[] tokens = analizadorLexico.analizar();
-    Salida.crearArchivo(analizadorLexico.getTokens().replaceAll("/", ""), archivoSalidaLexico);
-
-    AnalizadorSintactico analizadorSintactico = new AnalizadorSintactico(tokens);
-    LinkedList<HashMap<String, String>> dom = analizadorSintactico.analizar().getDom();
-    Salida.crearArchivo(dom.toString(), archivoSalidaSintactico);
-
-    System.out.println("\n\nAnalizador sintactico....\n");
-    System.out.println(dom);
+    Compilador compilador = new Compilador(archivoEntrada, archivoSalidaLexico, archivoSalidaSintactico, archivoSalidaHTML);
+    System.out.println((compilador.compilar()) ? "Compilacion exitosa" : "Compilacion Fallida");
   }
 }
