@@ -28,7 +28,7 @@ public class MaquinaEstados {
     String[] claveValor = token.split(",");
     String produccion = this.estadoActual + "-" + claveValor[0];
     this.estadoActual = this.producciones.get(produccion);
-    if(!token.matches("(FIN|OPCION)")) interpretarToken(claveValor[0], claveValor[1]);
+    if(!token.matches("(FIN|OPCION|INPUT|BTN|TITULO|SELECT)")) interpretarToken(claveValor[0], claveValor[1]);
 
     return this.producciones.containsKey(produccion);
   }

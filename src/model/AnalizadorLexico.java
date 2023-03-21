@@ -1,20 +1,19 @@
 package model;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import ui.Mensaje;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 
 public class AnalizadorLexico {
-  private final String archivoEntrada;
+  private final String codigo;
   private String tokens;
   private final HashMap<String, String> propNombres = new HashMap<>();
   private final LinkedList<String> errores = new LinkedList<>();
 
-  public AnalizadorLexico(String archivoEntrada){
-    this.archivoEntrada = archivoEntrada;
+  public AnalizadorLexico(String codigo){
+    this.codigo = codigo;
 
     propNombres.put("ph", "placeholder");
     propNombres.put("tp", "type");
@@ -24,19 +23,6 @@ public class AnalizadorLexico {
 
   public String getTokens() {
     return tokens;
-  }
-
-  private String leerArchivo(){
-    String data = "";
-
-    try{
-      data = new String(Files.readAllBytes(Paths.get(this.archivoEntrada))).replaceAll("[ \t" + System.lineSeparator() + "]+", " ");
-    } catch (IOException error) {
-      System.out.println(error.getMessage());
-      error.printStackTrace();
-    }
-
-    return data;
   }
 
   private String crearOpcion(String prop){
@@ -58,15 +44,13 @@ public class AnalizadorLexico {
   }
 
   public String[] analizar(){
-    String codigo = leerArchivo();
-
     if(codigo.isEmpty() || codigo.isBlank()){
       this.errores.add("Error Lexico, archivo vacio");
       return new String[]{};
     }
 
     this.tokens = Arrays.stream(codigo.split(" ")).map((palabra) -> {
-      if (palabra.matches("(?i)(input|titulo|fin|btn|radio|select)")) return "<" + palabra.toUpperCase() + ">";
+      if (palabra.matches("(?i)(input|titulo|fin|btn|select)")) return "<" + palabra.toUpperCase() + ">";
       else if (palabra.matches("(txt|lbl)=[a-zA-Z0-_]+")) return crearPropAuxiliar(palabra);
       else if (palabra.matches("opt=[a-zA-Z-_,]+")) return crearOpcion(palabra);
       else if (palabra.matches("[a-z]+=[a-zA-Z0-9-_,]+")) return crearProp(palabra);
@@ -84,7 +68,9 @@ public class AnalizadorLexico {
   }
 
   public boolean imprimirErrores(){
-    this.errores.forEach(System.out::println);
+    StringBuilder erroresStr = new StringBuilder("Se encontraron los siguientes errores: \n\n");
+    this.errores.forEach((error) -> erroresStr.append(error).append("\n"));
+    Mensaje.mostrarMensajeError(erroresStr.toString());
     return this.errores.isEmpty();
   }
 }

@@ -1,5 +1,7 @@
 package model;
 
+import ui.Mensaje;
+
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -29,7 +31,9 @@ public class AnalizadorSemantico {
   }
 
   public boolean imprimirErrores(){
-    this.errores.forEach(System.out::println);
+    StringBuilder erroresStr = new StringBuilder("Se encontraron los siguientes errores: \n\n");
+    this.errores.forEach((error) -> erroresStr.append(error).append("\n"));
+    Mensaje.mostrarMensajeError(erroresStr.toString());
     return this.errores.isEmpty();
   }
 }
