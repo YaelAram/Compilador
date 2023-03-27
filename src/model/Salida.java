@@ -2,7 +2,7 @@ package model;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-
+// Genera archivos de salida
 public class Salida {
   public static void crearArchivo(String salida, String archivoSalida){
     try{

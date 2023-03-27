@@ -8,7 +8,10 @@ public class HTML {
   public HTML(LinkedList<ElementoHTML> dom) {
     this.dom = dom;
   }
-
+/*
+Contiene los elementos generales como input, botones etc. (Todos los elementos HTML)
+ */
+  //Constructor HTML:
   public String crearHTML(){
     StringBuilder html = new StringBuilder("<!DOCTYPE html><html lang=\"es\"><head><meta charset=\"UTF-8\"/>" +
             "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" />" +
