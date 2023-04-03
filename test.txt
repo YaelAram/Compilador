@@ -4,10 +4,6 @@ input lbl=Nombre_de_Usuario  tp=text id=nom-usu ph=Nombre_de_Usuario cl=redondea
 
 input lbl=Password_de_Usuario tp=password id=pass-usu ph=Password_de_Usuario cl=borde,redondeado fin
 
-select lbl=Genero id=genero cl=estilo
-	opt=masculino,false,Masculino
-	opt=femenino,true,Femenino fin
-
 select lbl=Estado id=estado cl=estilo
 	opt=edomex,false,Estado_de_Mexico
 	opt=cdmx,true,Ciudad_de_Mexico
