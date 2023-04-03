@@ -1,7 +1,9 @@
 package html;
 
 import java.util.HashMap;
-
+/*
+Clase para generar las entradas HTML (Campos de texto) y su tipo
+ */
 public class Input extends ElementoHTML {
   private final String id;
   private final String pista;

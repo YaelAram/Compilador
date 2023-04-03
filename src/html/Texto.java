@@ -1,7 +1,9 @@
 package html;
 
 import java.util.HashMap;
-
+/*
+Clase para darle formato a las etiquetas H1 y Label
+ */
 public class Texto extends ElementoHTML {
   private final String texto;
   private final String id;

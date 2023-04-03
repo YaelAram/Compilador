@@ -1,7 +1,10 @@
 package html;
 
 import java.util.HashMap;
-
+/*
+Se generan los elementos necesarios para una lista desplegable a usar posteriormente
+En el UI para selección de opciones
+ */
 public class ListaDesplegable extends ElementoHTML {
   private final String id;
   private final String opciones;

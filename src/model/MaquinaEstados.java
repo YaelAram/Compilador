@@ -2,13 +2,16 @@ package model;
 
 import java.util.HashMap;
 
+//Clase para la máquina de estados
 public class MaquinaEstados {
+  //Genera los elementos a usar para la máquina de estados
   private final String elemento;
   private final HashMap<String, String> producciones = new HashMap<>();
   private final HashMap<String, String> label = new HashMap<>();
   private final HashMap<String, String> etiqueta = new HashMap<>();
   private String estadoActual;
   private String opcion = "<option value=\"";
+
 
   public MaquinaEstados(String elemento){
     this.elemento = elemento;
@@ -24,15 +27,23 @@ public class MaquinaEstados {
     return etiqueta;
   }
 
+  /*
+  Verifica los tokens para posteriormente utilizarlos en la producción
+   */
   public boolean verificar(String token){
+    //Divide con clave valor los elementos en los tokens
     String[] claveValor = token.split(",");
+    //Genera la producción con el estado actual más su clave valor
     String produccion = this.estadoActual + "-" + claveValor[0];
+    //Actualiza el estado actual
     this.estadoActual = this.producciones.get(produccion);
+    //Interpreta la opción adecuada para añadirle una etiqueta
     if(!token.matches("(FIN|OPCION|INPUT|BTN|TITULO|SELECT)")) interpretarToken(claveValor[0], claveValor[1]);
 
     return this.producciones.containsKey(produccion);
   }
 
+  // Convierte los tokens en sus equivalentes HTML
   private void interpretarToken(String clave, String valor){
     String produccion = this.elemento + "-" + clave;
     if(produccion.equals("TITULO-TEXTO")){
@@ -63,6 +74,7 @@ public class MaquinaEstados {
     }
   }
 
+  //Crea las producciones pertinentes en cada caso
   private void crearProducciones(){
     switch (this.elemento) {
       case "TITULO" -> crearProduccionesTitulo();
