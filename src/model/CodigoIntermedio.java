@@ -7,10 +7,12 @@ import java.util.LinkedList;
 
 //Se genera la clase que funcine como código intermedio
 public class CodigoIntermedio {
-  //Se agregan los correspondientes elementos para su funcionamiento
+  //Se agregan los correspondientes elementos para su funcionamiento como:
+  //El árbol sintáctico como una constante liked list hashmap para que no pierda su orden
   private final LinkedList<HashMap<String, String>> arbolSintactico;
   private final LinkedList<ElementoHTML> dom = new LinkedList<>();
 
+  //Se genera el constructor del árbol sintáctico
   public CodigoIntermedio(LinkedList<HashMap<String, String>> arbolSintactico) {
     this.arbolSintactico = arbolSintactico;
   }

@@ -40,11 +40,14 @@ método para analizar siguiendo el analizador semántico
   public boolean error(){
     return !this.errores.isEmpty();
   }
+
 //Imprime los errores en la anterior lista de errores
   public boolean imprimirErrores(){
     StringBuilder erroresStr = new StringBuilder("Se encontraron los siguientes errores: \n\n");
+    //Se itera para ir agregando cada error encontrado
     this.errores.forEach((error) -> erroresStr.append(error).append("\n"));
     Mensaje.mostrarMensajeError(erroresStr.toString());
+    //Valida si está vacía para volver a iniciar el proceso
     return this.errores.isEmpty();
   }
 }

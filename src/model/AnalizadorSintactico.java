@@ -7,16 +7,20 @@ import java.util.LinkedList;
 
 //Generamos la clase analizador Sintáctico
 public class AnalizadorSintactico {
-//Se generan todos los elementos necesarios además de ciertos imports a clases externas a usar
+/*Se generan todos los elementos necesarios como los tokens en un arreglo de strings,
+nuestra máquina de estados, nuestro árbol sintáctico como un hash map con linked list
+y una lista de errores; además de ciertos imports a clases externas a usar
+ */
   private final String[] tokens;
   private MaquinaEstados maquinaEstados;
   private final LinkedList<HashMap<String, String>> arbolSintactico = new LinkedList<>();
   private final LinkedList<String> errores = new LinkedList<>();
 
+  //Se inicia un constructor para los tokens
   public AnalizadorSintactico(String[] tokens){
     this.tokens = tokens;
   }
-
+  //Método Get para el árbol sintáctico
   public LinkedList<HashMap<String, String>> getArbolSintactico() {
     return arbolSintactico;
   }
@@ -48,8 +52,11 @@ public class AnalizadorSintactico {
 
   //Se imprimen los errores enlister
   public boolean imprimirErrores(){
+    //Se genera un formato para regresar la respuesta de errores encontrados
     StringBuilder erroresStr = new StringBuilder("Se encontraron los siguientes errores: \n\n");
+    //Se agregan los errores encontrados
     this.errores.forEach((error) -> erroresStr.append(error).append("\n"));
+    //Se muestra los mensajes de error
     Mensaje.mostrarMensajeError(erroresStr.toString());
     return this.errores.isEmpty();
   }

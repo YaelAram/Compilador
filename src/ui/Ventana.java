@@ -10,7 +10,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 //Se genera la ventana
 public class Ventana extends JFrame implements ActionListener {
-  //Se definen los campos necesarios
+  //Se definen los campos necesarios como el área para el texto, el botón para las acciones y un string
+  //De archivo externo
   private final Estilo estilo = new Estilo(this);
   private JTextArea codigo;
   private JButton compilar, cargar, guardar;
@@ -67,7 +68,7 @@ public class Ventana extends JFrame implements ActionListener {
       jFileChooser.showOpenDialog(this);
       File archivo = jFileChooser.getSelectedFile();
 
-      //Si el archivo es vacio, se le manda un archivo vacio
+      //Si el archivo es vacío, se le manda un archivo vacío
       if(archivo != null) {
         this.archivoExterno = archivo.getAbsolutePath().replace(".txt", "");
         codigo.setText(Compilador.leerArchivo(this.archivoExterno + ".txt"));
@@ -82,7 +83,7 @@ public class Ventana extends JFrame implements ActionListener {
         jFileChooser.showOpenDialog(this);
         File archivo = jFileChooser.getSelectedFile();
 
-        //Si el archivo es vacio se guardará en la ruta
+        //Si el archivo es vacío se guardará en la ruta
         if(archivo != null) this.archivoExterno = archivo.getAbsolutePath();
       }
       //Crea el archivo con el archivoExterno

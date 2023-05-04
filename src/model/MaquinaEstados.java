@@ -74,7 +74,7 @@ public class MaquinaEstados {
     }
   }
 
-  //Crea las producciones pertinentes en cada caso
+  //Crea las producciones pertinentes en cada caso para darle el formato adecuado
   private void crearProducciones(){
     switch (this.elemento) {
       case "TITULO" -> crearProduccionesTitulo();
@@ -84,17 +84,20 @@ public class MaquinaEstados {
     }
   }
 
+  //Crea las producciones para los títulos
   private void crearProduccionesTitulo(){
     this.producciones.put("TITULO-TEXTO", "TEXTO");
     this.producciones.put("TEXTO-FIN", "FIN");
   }
 
+  //Crea las producciones para los botones
   private void crearProduccionesBTN(){
     this.producciones.put("BTN-TEXTO", "TEXTO");
     this.producciones.put("TEXTO-CLASS", "CLASS");
     this.producciones.put("CLASS-FIN", "FIN");
   }
 
+  //Crea las producciones de entrada
   private void crearProduccionesInput(){
     this.producciones.put("INPUT-TEXTO", "TEXTO");
     this.producciones.put("TEXTO-TYPE", "TYPE");
@@ -104,6 +107,7 @@ public class MaquinaEstados {
     this.producciones.put("CLASS-FIN", "FIN");
   }
 
+  //Crea las producciones de de selección
   private void crearProduccionesSelect(){
     this.producciones.put("SELECT-TEXTO", "TEXTO");
     this.producciones.put("TEXTO-ID", "ID");

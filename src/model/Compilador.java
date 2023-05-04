@@ -13,7 +13,7 @@ public class Compilador {
   private final String codigo;
   private final String archivoSalidaHTML;
 
-
+//Se genera el constructor del compilador con sus archivos de salida y su código
   public Compilador(String archivoSalidaHTML, String codigo) {
     this.archivoSalidaHTML = archivoSalidaHTML;
     this.codigo = codigo;

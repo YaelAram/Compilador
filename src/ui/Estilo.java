@@ -16,13 +16,14 @@ public class Estilo implements FocusListener, MouseListener {
   private final Color black = new Color(0, 0, 0);
   private final Font primaryFont = new Font("Roboto", Font.PLAIN, 16);
   private final Font primaryFontBold = new Font("Roboto", Font.BOLD, 16);
+  //Se declara Jframe como una constante
   private final JFrame jFrame;
 
   public Estilo(JFrame jFrame){
     this.jFrame = jFrame;
   }
 
-  // Se le definen los limites, titulo, el color del fondo y algunas caracteristicas del Frame
+  // Se le definen los límites, título, el color del fondo y algunas características del Frame
   public void frameEstilo(String title, int exitMode, int[] bound){
     this.jFrame.setBounds(bound[0], bound[1], bound[2], bound[3]);
     this.jFrame.setTitle(title);
@@ -32,13 +33,13 @@ public class Estilo implements FocusListener, MouseListener {
     this.jFrame.setLocationRelativeTo(null);
   }
 
-  //Se le da color al fondo, la fuente y los limites del TextField tanto del activo como del inactivo
+  //Se le da color al fondo, la fuente y los límites del TextField tanto del activo como del inactivo
   public void activoTextComponentEstilo(JTextComponent jTextField){
       jTextField.setBorder(BorderFactory.createMatteBorder(3, 3, 3, 3, this.greyDark));
       jTextField.setBackground(this.greyLight);
       jTextField.setForeground(this.black);
   }
-
+  //Se le da color a los elementos previamente mencionados al inactivo
   public void inactivoTextComponentEstilo(JTextComponent jTextField){
     jTextField.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, this.greyDark));
     jTextField.setBackground(this.grey);
@@ -62,7 +63,7 @@ public class Estilo implements FocusListener, MouseListener {
     jButton.setBackground(this.greyDark);
     jButton.setForeground(this.greyLight);
   }
-
+  //Se le colocan los elementos previamente mencionados para el inactivo
   public void inactivoButtonEstilo(JButton jButton){
     jButton.setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, this.greyDark));
     jButton.setBackground(this.greyLight);
@@ -80,8 +81,8 @@ public class Estilo implements FocusListener, MouseListener {
     jFrame.add(jButton);
   }
 
-  //Se le da la accion a los Focus Events
-  //FocusGained es cuando se puede escribir y parapadea el cursor sobre el campo
+  //Se le da la acción a los Focus Events
+  //El método FocusGained permite escribir y genera el evento de parpadeo en el cursor sobre el campo
   @Override
   public void focusGained(FocusEvent focusEvent) {
     try{
@@ -93,7 +94,8 @@ public class Estilo implements FocusListener, MouseListener {
     }
   }
 
-  //FocusLost es cuando haces click en otro lado y ya no se puede escribir y deja de parpadear el cursor
+  //El método FocusLost permite la característica donde al dar click en otro lado,
+  // ya no se puede escribir y deja de parpadear el cursor
   @Override
   public void focusLost(FocusEvent focusEvent) {
     try{
@@ -107,13 +109,16 @@ public class Estilo implements FocusListener, MouseListener {
 
   //Se definen los Mouse Events
   @Override
+  //Cuando el mouse es clickeado
   public void mouseClicked(MouseEvent e) {
   }
 
+  //El intervalo mientras está presionado
   @Override
   public void mousePressed(MouseEvent e) {
   }
 
+  //El intervalo mientras se suelta
   @Override
   public void mouseReleased(MouseEvent e) {
   }
@@ -130,7 +135,7 @@ public class Estilo implements FocusListener, MouseListener {
     }
   }
 
-  //Se le agrega el cambio de color cuando el mouse sale de encima del campo
+  //Se le agrega el cambio de color cuando el mouse sale del campo
   @Override
   public void mouseExited(MouseEvent mouseEvent) {
     try{

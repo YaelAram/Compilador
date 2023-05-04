@@ -48,7 +48,7 @@ public class AnalizadorLexico {
   private String crearProp(String prop){
     String[] propValores = prop.split("=");
     String propNombre = this.propNombres.get(propValores[0]);
-
+    //Da una respuesta con el formato deseado
     return "<" + propNombre.toUpperCase() + "," + propNombre + "=\"" + propValores[1].replaceAll("[_,]+", " ") + "\"" + ">";
   }
 
@@ -67,6 +67,7 @@ public class AnalizadorLexico {
       else if (palabra.matches("opt=[a-zA-Z-_,]+")) return crearOpcion(palabra);
       else if (palabra.matches("[a-z]+=[a-zA-Z0-9-_,]+")) return crearProp(palabra);
       else{
+        //Se añade el error encontrado a la lista de errores
         this.errores.add("Error lexico, cadena no reconocida por el lenguaje: " + palabra);
         return "";
       }
