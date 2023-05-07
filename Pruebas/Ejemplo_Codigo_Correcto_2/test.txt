@@ -1,0 +1,11 @@
+titulo txt=Registro fin
+
+input lbl=Nombre_de_Usuario tp=text id=nom-usu ph=Elon cl=borde-inferior fin
+
+input lbl=Apellido_Paterno tp=text id=ap-usu ph=Musk cl=borde-inferior fin
+
+input lbl=Correo_Electronico tp=email id=email-usu ph=Email cl=borde-inferior fin
+
+input lbl=Password_de_Usuario tp=password id=pass-usu ph=Password_de_Usuario cl=borde-inferior fin
+
+btn txt=Iniciar_Sesion cl=relleno fin

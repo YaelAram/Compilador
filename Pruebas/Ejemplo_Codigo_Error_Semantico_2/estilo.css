@@ -1,0 +1,127 @@
+/* Generales */
+html, button{
+  font-family: 'Poppins', sans-serif;
+}
+
+h1, label, input, option, button{
+  word-spacing: 1px;
+  line-height: 1.5;
+}
+
+body{
+  padding-top: 0.5rem;
+  display: grid;
+  grid-template-columns: 3fr 4fr 3fr;
+  gap: 0.5rem;
+  background-color: #bdbfc6;
+}
+
+main{
+  grid-row: 1;
+  grid-column: 2;
+  background-color: white;
+  margin-top: 1rem;
+  padding: 2rem 3rem;
+}
+
+form{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+}
+
+h1{
+  margin-block: 0;
+  font-size: xx-large;
+  margin-bottom: 0.75rem;
+}
+
+label{
+  margin-top: 0.25rem;
+  font-size: medium;
+  font-style: italic;
+  font-weight: lighter;
+}
+
+input{
+  font-size: large;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  outline: none;
+}
+
+input:focus{
+  outline: none;
+}
+
+button{
+  margin-top: 1rem;
+  font-weight: bold;
+  font-size: x-large;
+  padding: 0.25rem 0;
+}
+
+button:hover{
+  cursor: pointer;
+}
+
+/* Especificos */
+
+.redondeado{
+  border-radius: 0.5rem;
+}
+
+/* Input */
+
+.borde-inferior{
+  border: 1px solid black;
+  border-width: 0px 0px 1px;
+}
+
+.borde-inferior:focus{
+  border: 1px solid black;
+  border-width: 0 0 3px;
+}
+
+.borde{
+  border: 1px solid black;
+}
+
+.borde:focus{
+  border: 3px solid black;
+}
+
+/* Select */
+
+.estilo{
+  font-family: 'Poppins', sans-serif;
+  font-size: large;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+}
+
+/* Button */
+
+.relleno{
+  border: 1px solid black;
+  background-color: black;
+  color: white;
+}
+
+.relleno:hover{
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+}
+
+.vacio{
+  border: 1px solid black;
+  background-color: white;
+  color: black;
+}
+
+.vacio:hover{
+  border: 2px solid black;
+  background-color: black;
+  color: white;
+}

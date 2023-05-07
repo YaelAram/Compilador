@@ -1,0 +1,12 @@
+titulo txt=Inicio_Sesion fin
+
+input lbl=Nombre_de_Usuario  tp=text id=nom-usu ph=Nombre_de_Usuario cl=redondeado,borde fin
+
+input lbl=Password_de_Usuario tp=password id=pass-usu ph=Password_de_Usuario cl=borde,redondeado fin
+
+select lbl=Estado id=estado cl=estilo
+	opt=edomex,true,Estado_de_Mexico
+	opt=cdmx,true,Ciudad_de_Mexico
+	opt=puebla,false,Puebla fin
+
+btn txt=Iniciar_Sesion cl=vacio,redondea fin
